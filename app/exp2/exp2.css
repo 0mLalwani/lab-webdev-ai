@@ -1,0 +1,121 @@
+/* =========================================================
+   exp2 · Bootstrap landing page tweaks
+   Scoped with the .exp2 wrapper so Tailwind/base styles
+   from the root layout don't fight Bootstrap's reboot.
+   ========================================================= */
+
+.exp2 {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* --- Hero --- */
+.exp2 .hero {
+  background: linear-gradient(135deg, #0b1120 0%, #1e3a8a 55%, #0ea5e9 100%);
+  color: #fff;
+  padding: 6rem 0 5rem;
+}
+
+.exp2 .hero .lead {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.exp2 .hero-visual {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+}
+
+.exp2 .hero-visual .bar {
+  height: 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  margin-bottom: 0.75rem;
+}
+
+/* --- Stats strip --- */
+.exp2 .stats {
+  background: #0b1120;
+  color: #fff;
+}
+
+.exp2 .stats .num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* --- Cards / sections --- */
+.exp2 .section {
+  padding: 4.5rem 0;
+}
+
+.exp2 .icon-chip {
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: #e0f2fe;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.exp2 .pricing .card {
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exp2 .pricing .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+.exp2 .pricing .featured {
+  border: 2px solid #0ea5e9;
+  box-shadow: 0 16px 40px rgba(14, 165, 233, 0.18);
+}
+
+.exp2 .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.exp2 .price small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #64748b;
+}
+
+/* --- CTA band --- */
+.exp2 .cta-band {
+  background: linear-gradient(120deg, #0ea5e9, #1e3a8a);
+  color: #fff;
+  border-radius: 1rem;
+  padding: 3rem;
+}
+
+/* --- Footer --- */
+.exp2 footer a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.exp2 footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 767.98px) {
+  .exp2 .hero {
+    padding: 4rem 0 3.5rem;
+  }
+
+  .exp2 .cta-band {
+    padding: 2rem;
+  }
+}

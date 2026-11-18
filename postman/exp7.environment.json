@@ -1,0 +1,9 @@
+{
+  "id": "exp7-local-env",
+  "name": "exp7 · local",
+  "values": [
+    { "key": "baseUrl", "value": "http://localhost:4007", "type": "default", "enabled": true },
+    { "key": "productId", "value": "", "type": "default", "enabled": true }
+  ],
+  "_postman_variable_scope": "environment"
+}

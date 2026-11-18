@@ -1,0 +1,106 @@
+/* =========================================================
+   exp1 · Blue-sky / cloudy parallax theme
+   + glass sidebar overrides
+   ========================================================= */
+
+/* ---------- Deep blue sky (dark, rich, cloudy-day mood) ---------- */
+.sky-gradient {
+  background: linear-gradient(
+    180deg,
+    #04203f 0%,
+    #073159 20%,
+    #0a4175 42%,
+    #0d5190 64%,
+    #1163aa 82%,
+    #1a72bd 100%
+  );
+}
+
+/* ---------- Sun ---------- */
+.sky-sun {
+  background: radial-gradient(
+    circle,
+    rgba(255, 253, 240, 0.95) 0%,
+    rgba(255, 240, 190, 0.8) 38%,
+    rgba(255, 232, 165, 0.3) 60%,
+    rgba(255, 232, 165, 0) 74%
+  );
+  box-shadow: 0 0 110px 40px rgba(255, 240, 190, 0.28);
+}
+
+/* ---------- Soft haze near the horizon (bottom of viewport) ---------- */
+.sky-horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38vh;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.07) 55%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Parallax layers ---------- */
+.parallax-layer {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Seamless horizontal drift: two identical halves, translateX(-50%) */
+.parallax-drift {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  animation: sky-drift var(--drift, 60s) linear infinite;
+}
+
+.parallax-drift > * {
+  width: 50%;
+  height: 100%;
+  flex: none;
+}
+
+@keyframes sky-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-drift {
+    animation: none;
+  }
+}
+
+/* ---------- exp1 glass sidebar (overrides shadcn defaults) ---------- */
+/* Desktop: make the sidebar panel see-through so the sky shows through */
+[data-slot="sidebar-inner"] {
+  background: transparent;
+  border-radius: 0 1rem 1rem 0;
+}
+
+/* Mobile: glassy slide-in sheet */
+[data-mobile="true"][data-slot="sidebar"] {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border-left: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 0 1.25rem 1.25rem 0;
+  box-shadow: 0 8px 40px rgba(10, 40, 80, 0.2);
+}
+
+/* Hide nav labels when the sidebar is collapsed to an icon rail */
+.group[data-state="collapsed"] [data-slot="sidebar"] [data-sidebar="menu-item"] span {
+  display: none;
+}

@@ -1,0 +1,168 @@
+{
+  "info": {
+    "name": "exp7 · Products REST API",
+    "description": "AI-generated Postman collection for the exp7 RESTful API experiment.\n\n1. Import this file into Postman (File → Import).\n2. Import exp7.environment.json and select it.\n3. Run requests from top to bottom — use the 'List products' response's data[0]._id to set the `productId` variable.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4007" },
+    { "key": "productId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "0 · Health check",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/health", "host": ["{{baseUrl}}"], "path": ["api", "health"] }
+      }
+    },
+    {
+      "name": "1 · List products",
+      "request": {
+        "method": "GET",
+        "description": "Paginated collection. Defaults: page=1, limit=10, sort=-createdAt.",
+        "url": {
+          "raw": "{{baseUrl}}/api/products?page=1&limit=5",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "5" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "2 · Filter by category + inStock",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products?category=home&inStock=true",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            { "key": "category", "value": "home" },
+            { "key": "inStock", "value": "true" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "3 · Search + sort by price",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products?search=a&sort=price",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            { "key": "search", "value": "a" },
+            { "key": "sort", "value": "price" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "4 · Get single product",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "5 · Create product",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Coral Mechanical Keyboard\",\n  \"description\": \"Hot-swappable 75% keyboard\",\n  \"category\": \"electronics\",\n  \"price\": 89.99,\n  \"quantity\": 15,\n  \"inStock\": true\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"]
+        }
+      }
+    },
+    {
+      "name": "6 · Update product (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Coral Mechanical Keyboard v2\",\n  \"description\": \"Updated model with sound dampening\",\n  \"category\": \"electronics\",\n  \"price\": 99.99,\n  \"quantity\": 20,\n  \"inStock\": true\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "7 · Partial update (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 79.99,\n  \"quantity\": 3\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "8 · Delete product (204)",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "9 · Error demo: not found (404)",
+      "request": {
+        "method": "GET",
+        "description": "Expects a JSON error envelope — 400 for malformed ids, 404 for well-formed ids that don't exist.",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/does-not-exist",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "does-not-exist"]
+        }
+      }
+    },
+    {
+      "name": "10 · Error demo: invalid body (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category\": \"nope\",\n  \"price\": -5\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"]
+        }
+      }
+    }
+  ]
+}
